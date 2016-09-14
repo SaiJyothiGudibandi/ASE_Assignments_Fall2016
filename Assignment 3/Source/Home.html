@@ -1,0 +1,29 @@
+<html ng-app="MashApp">
+<head>
+<title>Testing Mash Application </title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+<script src="IntegratingFile.js"></script>
+
+<style>
+    #SentimentAnalysing {
+        visibility: hidden;
+    }
+</style>
+</head>
+
+<body ng-controller="Sentiment" background="http://www.solidbackgrounds.com/images/2880x1800/2880x1800-light-blue-solid-color-background.jpg"><br><br><center>
+Enter Text: <input type="text" ng-model="SentiText" id="sentitext"/>
+<button ng-click="getReviews(SentiText)">Get Text</button>
+<br/><br/><br/>
+{{ sentiment1 }}
+<br/><br/><br/>
+<div id="SentimentAnalysing" ng-class="{'myClass': HideAuthorMoodButton}">
+<button id="Senti" ng-click="getSentiment(sentiment1)">Get Author Mood</button>
+</div>
+<br/><br/><br/>
+{{ sentiment }}
+</center>
+</body>
+</html>

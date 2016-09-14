@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="jquery.js"></script>
+    <style>
+        .Login{
+            background-color: lightsteelblue;
+        }
+        .SignIn{
+            background-color: lightsteelblue;
+        }
+
+    </style>
+
+    <script>
+        var OAUTHURL    =   'https://accounts.google.com/o/oauth2/auth?';
+        var VALIDURL    =   'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
+        var SCOPE       =   'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
+        var CLIENTID    =   '933118218738-n83ueejreulh96e780dja8ct2pt201n8.apps.googleusercontent.com';
+        var REDIRECT    =   'http://localhost:63342/Assignment5/Home.html';
+        var LOGOUT      =   'http://accounts.google.com/Logout';
+        var TYPE        =   'token';
+        var TYPE        =   'token';
+        var _url        =   OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
+        var acToken;
+        var tokenType;
+        var expiresIn;
+        var user;
+        var loggedIn    =   false;
+
+        function login() {
+            var win         =   window.open(_url, 'window1', 'width=900, height=800');
+
+            var pollTimer   =   window.setInterval(function() {
+                try {
+                    console.log(win.document.URL);
+                    if (win.document.URL.indexOf(REDIRECT) != -1) {
+                        window.clearInterval(pollTimer);
+                        var url =   win.document.URL;
+                        acToken =   gup(url, 'access_token');
+                        tokenType = gup(url, 'token_type');
+                        expiresIn = gup(url, 'expires_in');
+                        win.close();
+
+                        validateToken(acToken);
+                    }
+                } catch(e) {
+                }
+            }, 100000000000000);
+        }
+
+        function validateToken(token) {
+            $.ajax({
+                url: VALIDURL + token,
+                data: null,
+                success: function(responseText){
+                    getUserInfo();
+                    loggedIn = true;
+                    $('#loginText').hide();
+                    $('#logoutText').show();
+                },
+                dataType: "jsonp"
+            });
+        }
+
+        function getUserInfo() {
+            $.ajax({
+                url: 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + acToken,
+                data: null,
+                success: function(resp) {
+                    user    =   resp;
+                    console.log(user);
+                    $('#uName').text('Welcome ' + user.name);
+                    $('#imgHolder').attr('src', user.picture);
+                },
+                dataType: "jsonp"
+            });
+        }
+
+        //credits: http://www.netlobo.com/url_query_string_javascript.html
+        function gup(url, name) {
+            name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+            var regexS = "[\\#&]"+name+"=([^&#]*)";
+            var regex = new RegExp( regexS );
+            var results = regex.exec( url );
+            if( results == null )
+                return "";
+            else
+                return results[1];
+        }
+
+        function startLogoutPolling() {
+            $('#loginText').show();
+            $('#logoutText').hide();
+            loggedIn = false;
+            $('#uName').text('Welcome ');
+            $('#imgHolder').attr('src', 'none.jpg');
+        }
+
+    </script>
+</head>
+
+<body background="http://wallpapercave.com/wp/GbwKH1d.jpg">
+<iframe name='myIFrame' id="myIFrame" style='display:none'></iframe>
+<div id='uName'></div>
+<center>
+
+    <h1>Login</h1>
+    <br><br>
+
+    <tr>
+        <td>
+            UserName:
+        </td>
+        <td>
+            <input type="text" ng-model="UserName" id="Username" placeholder="Enter user name" />
+        </td>
+    </tr>
+    <tr><br><br>
+        <td>
+            Password:
+        </td>
+        <td>
+            <input type="password" ng-model="Password" id="password" placeholder="Enter password" />
+        </td>
+    </tr><br><br>
+    <tr>
+        <td>
+            <button class="Login" onclick="window.location='Home.html'" value="Login" >Login</button>
+
+        </td>
+        <td>
+            <a href='#' onClick='login();' id="loginText"> <button class="SignIn" name="SignIn">Sign in with Gmail</button> </a>
+        </td>
+    </tr>
+</center>
+</body>
+</html>
