@@ -4,8 +4,6 @@ app.controller('LoginController',function($scope,$rootScope,$location,$state) {
 
     $scope.submitForm = function(isValid) {
 
-
-
         //$scope.submitted = true;
         if (isValid) {
             console.log(localStorage.getItem("Student_details"));

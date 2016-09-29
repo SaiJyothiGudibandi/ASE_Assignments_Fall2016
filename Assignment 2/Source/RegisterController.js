@@ -1,6 +1,4 @@
-/**
- * Created by rajaramya on 2/14/2016.
- */
+
 app.controller('RegisterController',function($scope,$rootScope,$location,$state) {
     $scope.continueMsg=true;
     $scope.submitForm = function(isValid) {
