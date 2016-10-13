@@ -1,3 +1,3 @@
 # Assignments
-Wiki page for Assignment 6.
-https://github.com/saijyothi9/Assignments/wiki/Assignment-6
+Wiki page for Assignment 7.
+https://github.com/saijyothi9/Assignments/wiki/Assignment7
