@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="" >
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   
+</head>
+<style>
+body{
+	background:url('http://new.goinvisible.com/wp-content/uploads/1797398.jpg');
+	background-repeat: no-repeat;
+    background-size: cover;
+}
+.form-control{
+    border-radius:8px;
+}
+
+.navbar-brand{
+    color:white;
+    font-family: Microsoft sans-serif;
+    font-size:35px;
+    padding-left:40%;
+}
+
+a{
+	color:white;
+}
+.btn{
+background:gray;
+}
+.text{
+	margin-top:10px;
+	width:50%;
+	margin-left:320px;
+}
+#buttons{
+margin-left:320px;
+margin-top:20px;
+}
+</style>
+<body>
+<nav class="navbar navbar-light bg-faded">
+    <h1 class="navbar-brand m-b-0">Distance Calculation
+    </h1>
+</nav>
+<div class="form-group">
+    <div class="text">
+        <input class="form-control" id="amount" type="text" placeholder="Enter Meters">
+    </div>
+ 
+    <div id="buttons">
+    <button type="button" class="btn btn-default"><a href="http://localhost:8080/RESTExample/restexample/SIService/si/2000">Convert Meters to Kilometers</a></button>
+<button type="button" class="btn btn-default"><a href="http://localhost:8080/RESTExample/restexample/CIService/ci/2000">Convert Meters to Centimeters</a></button>
+ </div>
+</div>
+
+
+</body>
+</html>
+   
